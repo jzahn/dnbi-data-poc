@@ -31,7 +31,7 @@ public class JdbcDao {
     		config.setPassword("yourStrong(!)Password");
     		config.setMaximumPoolSize(10);
     		config.setAutoCommit(false);
-    		config.setConnectionTestQuery("SELECT GETDATE()");
+    		config.setConnectionTestQuery("SELECT 1");
     		config.addDataSourceProperty("databaseName", "test");
     		config.addDataSourceProperty("cachePrepStmts", "true");
     		config.addDataSourceProperty("prepStmtCacheSize", "250");
