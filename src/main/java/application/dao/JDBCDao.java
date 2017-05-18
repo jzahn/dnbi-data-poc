@@ -18,7 +18,7 @@ public class JdbcDao {
 	
 	static {
 		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Class.forName("net.sourceforge.jtds.jdbc.Driver");
 		}
 		catch (Exception e) {}
 	}
@@ -26,11 +26,12 @@ public class JdbcDao {
     private DataSource getDataSource() {
     	if (dataSource == null) {
     		HikariConfig config = new HikariConfig();
-    		config.setJdbcUrl("jdbc:sqlserver://localhost:1433");
+    		config.setJdbcUrl("jdbc:jtds:sqlserver://localhost:1433");
     		config.setUsername("sa");
     		config.setPassword("yourStrong(!)Password");
     		config.setMaximumPoolSize(10);
     		config.setAutoCommit(false);
+    		config.setConnectionTestQuery("SELECT GETDATE()");
     		config.addDataSourceProperty("databaseName", "test");
     		config.addDataSourceProperty("cachePrepStmts", "true");
     		config.addDataSourceProperty("prepStmtCacheSize", "250");
