@@ -1,6 +1,0 @@
-application/Application.class
-application/dao/JDBCDao.class
-application/dao/PersonDAO.class
-application/domain/Person.class
-application/service/PersonService.class
-application/controller/HelloController.class
