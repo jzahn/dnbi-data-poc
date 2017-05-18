@@ -6,7 +6,7 @@ import java.util.List;
 
 import application.domain.Person;
 
-public class PersonDAO extends JDBCDao {
+public class PersonDao extends JdbcDao {
 
 	public List<Person> getAllPersons() {
 		List<Person> results = new ArrayList<Person>();
@@ -20,7 +20,6 @@ public class PersonDAO extends JDBCDao {
 			}
 		}
 
-		// Handle any errors that may have occurred.
 		catch (Exception e) {
 			e.printStackTrace();
 		} finally {
