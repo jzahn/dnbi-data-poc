@@ -14,7 +14,6 @@ public class PersonDAO extends JDBCDao {
 		String sql = "SELECT * FROM Persons order by PersonId";
 
 		ResultSet rs = query(sql);
-
 		try {
 			while (rs.next()) {
 				results.add(new Person(rs.getInt("PersonId"), rs.getString("FirstName"), rs.getString("LastName")));
