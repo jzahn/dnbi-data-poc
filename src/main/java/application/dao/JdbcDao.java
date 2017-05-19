@@ -6,11 +6,12 @@ import java.sql.Statement;
 
 import javax.sql.DataSource;
 import javax.sql.rowset.CachedRowSet;
-import com.sun.rowset.CachedRowSetImpl;
 
+import com.sun.rowset.CachedRowSetImpl;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+@SuppressWarnings("restriction")
 public class JdbcDao {
 	private static DataSource dataSource = null;
 	private	Connection con = null;  
