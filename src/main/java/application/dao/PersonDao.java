@@ -1,8 +1,9 @@
 package application.dao;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.sql.rowset.CachedRowSet;
 
 import application.domain.Person;
 
@@ -13,7 +14,7 @@ public class PersonDao extends JdbcDao {
 
 		String sql = "SELECT * FROM Persons order by PersonId";
 
-		ResultSet rs = query(sql);
+		CachedRowSet rs = query(sql);
 		
 		try {
 			while (rs.next()) {
@@ -22,8 +23,6 @@ public class PersonDao extends JdbcDao {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			cleanup();
 		}
 
 		return results;

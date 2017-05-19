@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import javax.sql.DataSource;
+import javax.sql.rowset.CachedRowSet;
+import com.sun.rowset.CachedRowSetImpl;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -35,17 +37,20 @@ public class JdbcDao {
 		dataSource = new HikariDataSource(config);
 	}
 	    
-	public ResultSet query(String sql) {
-		try {  
-			con = dataSource.getConnection();  
-			stmt = con.createStatement(); 
-			rs = stmt.executeQuery(sql);  
+	public CachedRowSet query(String sql) {
+		CachedRowSet results = null;
+		try (Connection con = dataSource.getConnection();  
+			 Statement stmt = con.createStatement(); 
+			 ResultSet rs = stmt.executeQuery(sql);) {  
+			
+			results = new CachedRowSetImpl();
+			results.populate(rs);
 		}
 		catch (Exception e) {  
 			e.printStackTrace();
 		}
 	      
-		return rs;
+		return results;
 	}
 	
 	public void cleanup() {
