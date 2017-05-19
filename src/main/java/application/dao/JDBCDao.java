@@ -35,7 +35,6 @@ public class JdbcDao {
 		dataSource = new HikariDataSource(config);
 	}
 	    
-	
 	public ResultSet query(String sql) {
 		try {  
 			con = dataSource.getConnection();  
