@@ -14,9 +14,6 @@ import com.zaxxer.hikari.HikariDataSource;
 @SuppressWarnings("restriction")
 public class JdbcDao {
 	private static DataSource dataSource = null;
-	private	Connection con = null;  
-    private Statement stmt = null;  
-    private ResultSet rs = null; 
 	
 	static {
 		try {
@@ -52,11 +49,5 @@ public class JdbcDao {
 		}
 	      
 		return results;
-	}
-	
-	public void cleanup() {
-		if (stmt != null) try { stmt.close(); } catch(Exception e) {}  
-        if (con != null) try { con.close(); } catch(Exception e) {}  
-		if (rs != null) try { rs.close(); } catch (Exception e) {}
 	}
 }
