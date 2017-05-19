@@ -12,7 +12,7 @@ import application.service.PersonService;
 public class HelloController {
 	PersonService personService = new PersonService();
 
-    @RequestMapping("/")
+    @RequestMapping("/persontest")
     public List<Person> index() {
     	return personService.getPersons();
     }
