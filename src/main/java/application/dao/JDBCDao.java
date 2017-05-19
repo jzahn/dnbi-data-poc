@@ -11,7 +11,6 @@ import com.zaxxer.hikari.HikariDataSource;
 
 public class JdbcDao {
 	private static DataSource dataSource = null;
-	
 	private	Connection con = null;  
     private Statement stmt = null;  
     private ResultSet rs = null; 
@@ -21,34 +20,28 @@ public class JdbcDao {
 			Class.forName("net.sourceforge.jtds.jdbc.Driver");
 		}
 		catch (Exception e) {}
+		
+		HikariConfig config = new HikariConfig();
+		config.setJdbcUrl("jdbc:jtds:sqlserver://localhost:1433");
+		config.setUsername("sa");
+		config.setPassword("yourStrong(!)Password");
+		config.setMaximumPoolSize(10);
+		config.setAutoCommit(false);
+		config.setConnectionTestQuery("SELECT 1");
+		config.addDataSourceProperty("databaseName", "test");
+		config.addDataSourceProperty("cachePrepStmts", "true");
+		config.addDataSourceProperty("prepStmtCacheSize", "250");
+		config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+		dataSource = new HikariDataSource(config);
 	}
 	    
-    private DataSource getDataSource() {
-    	if (dataSource == null) {
-    		HikariConfig config = new HikariConfig();
-    		config.setJdbcUrl("jdbc:jtds:sqlserver://localhost:1433");
-    		config.setUsername("sa");
-    		config.setPassword("yourStrong(!)Password");
-    		config.setMaximumPoolSize(10);
-    		config.setAutoCommit(false);
-    		config.setConnectionTestQuery("SELECT 1");
-    		config.addDataSourceProperty("databaseName", "test");
-    		config.addDataSourceProperty("cachePrepStmts", "true");
-    		config.addDataSourceProperty("prepStmtCacheSize", "250");
-    		config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
-    		dataSource = new HikariDataSource(config);
-    	}
-    	
-    	return dataSource;
-    }
 	
 	public ResultSet query(String sql) {
 		try {  
-			con = getDataSource().getConnection();  
+			con = dataSource.getConnection();  
 			stmt = con.createStatement(); 
 			rs = stmt.executeQuery(sql);  
 		}
-  
 		catch (Exception e) {  
 			e.printStackTrace();
 		}
