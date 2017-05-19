@@ -42,7 +42,7 @@ public class JdbcDao {
 		CachedRowSet results = null;
 		try (Connection con = dataSource.getConnection();  
 			 Statement stmt = con.createStatement(); 
-			 ResultSet rs = stmt.executeQuery(sql);) {  
+			 ResultSet rs = stmt.executeQuery(sql)) {  
 			
 			results = new CachedRowSetImpl();
 			results.populate(rs);
